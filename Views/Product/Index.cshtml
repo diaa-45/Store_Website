@@ -1,0 +1,103 @@
+﻿@model IEnumerable<STORE_Website.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<form asp-action="Index" method="get" class="form-inline mb-3">
+    <div class="form-group mr-2">
+        <label for="name">Name:</label>
+        <input type="text" name="name" class="form-control" placeholder="Product name" value="@ViewContext.HttpContext.Request.Query["name"]" />
+    </div>
+    <div class="form-group mr-2">
+        <label for="minPrice">Min Price:</label>
+        <input type="number" name="minPrice" class="form-control" placeholder="Min Price" value="@ViewContext.HttpContext.Request.Query["minPrice"]" step="0.01" />
+    </div>
+
+    <div class="form-group mr-2">
+        <label for="maxPrice">Max Price:</label>
+        <input type="number" name="maxPrice" class="form-control" placeholder="Max Price" value="@ViewContext.HttpContext.Request.Query["maxPrice"]" step="0.01" />
+    </div>
+    <div class="form-group mr-2">
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="quantity" class="form-control" placeholder="Quantity" value="@ViewContext.HttpContext.Request.Query["quantity"]" step="0.01" />
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<h1>Index</h1>
+
+@if (Model.Count() != 0)
+{
+    
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+         @foreach (var item in Model) 
+            {
+            
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td class="w-25">
+                        <img class="card-img w-50 p-3" src="@item.ImageUrl" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryId)
+                </td>
+                <td>
+                        <a class="btn btn-primary" asp-action="Update" asp-route-id="@item.Id">Edit</a>
+                        <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+
+                </td>
+                </tr>
+            }
+    </tbody>
+</table>
+    <a class="btn btn-primary" asp-action="Create">Create New Product</a>
+}
+else
+{
+    <p>No Products founded</p>
+    <p>May be Create New Products !!?</p>
+    <a class="btn btn-primary" asp-action="Create">Create New Product</a>
+}
