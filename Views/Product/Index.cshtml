@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<form asp-action="Index" method="get" class="form-inline mb-3">
+<form asp-action="Index" method="get" class="form-inline mb-3 d-flex flex-wrap align-items-center">
     <div class="form-group mr-2">
         <label for="name">Name:</label>
         <input type="text" name="name" class="form-control" placeholder="Product name" value="@ViewContext.HttpContext.Request.Query["name"]" />
@@ -22,82 +22,116 @@
         <label for="quantity">Quantity:</label>
         <input type="number" name="quantity" class="form-control" placeholder="Quantity" value="@ViewContext.HttpContext.Request.Query["quantity"]" step="0.01" />
     </div>
-    <button type="submit" class="btn btn-primary">Search</button>
+    <button type="submit" class="btn btn-primary search-button m-auto">Search</button>
 </form>
 
 <h1>Index</h1>
 
-@if (Model.Count() != 0)
+@if(User.IsInRole("Admin"))
 {
-    
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Stock)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CategoryId)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-         @foreach (var item in Model) 
-            {
-            
+    @if (Model.Count() != 0)
+    {
+        <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td class="w-25">
-                        <img class="card-img w-50 p-3" src="@item.ImageUrl" />
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Stock)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CategoryId)
-                </td>
-                <td>
-                        <a class="btn btn-primary" asp-action="Update" asp-route-id="@item.Id">Edit</a>
-                        <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ImageUrl)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Stock)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CategoryId)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+                @foreach (var item in Model) 
+                {
+            
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td class="w-25">
+                            <img class="card-img w-50 p-3" src="@item.ImageUrl" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Stock)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoryId)
+                    </td>
+                    <td>
+                            <a class="btn btn-primary" asp-action="Update" asp-route-id="@item.Id">Edit</a>
+                            <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
 
-                </td>
-                </tr>
+                    </td>
+                    </tr>
+                }
+        </tbody>
+        </table>
+        <a class="btn btn-primary" asp-action="Create">Create New Product</a>
+    }
+    else
+    {
+        <p>No Products founded</p>
+        <p>May be Create New Products !!?</p>
+        <a class="btn btn-primary" asp-action="Create">Create New Product</a>
+    }
+}else if (User.IsInRole("User"))
+    {
+        @if (Model.Count() != 0)
+    {
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4">
+                    
+
+                    <div class="card mb-4">
+                        <a class="text-decoration-none" asp-action="Details" asp-route-id="@item.Id">
+                        <img src="@item.ImageUrl" class="card-img-top" alt="@item.Name" />
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Name</h5>
+                            <p class="card-text">@item.Description</p>
+                            <p class="card-text">Price: $@item.Price</p>
+                            <p class="card-text">Stock: @item.Stock</p>
+                            <a class="btn btn-primary" asp-route-id="@item.Id">Add To Cart</a>
+                        </div>
+                    </div>
+                    
+                </div>
             }
-    </tbody>
-</table>
-    <a class="btn btn-primary" asp-action="Create">Create New Product</a>
+        </div>
+    }
+    else
+    {
+        <p>No Products founded</p>
+    }
 }
-else
-{
-    <p>No Products founded</p>
-    <p>May be Create New Products !!?</p>
-    <a class="btn btn-primary" asp-action="Create">Create New Product</a>
-}
+

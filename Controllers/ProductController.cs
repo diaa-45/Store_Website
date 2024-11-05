@@ -20,6 +20,7 @@ namespace STORE_Website.Controllers
             this.categoryRepository = categoryRepository;
             this.webHostEnvironment = webHostEnvironment;
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Index(string name = "",decimal? minPrice = null, decimal? maxPrice = null,int? quantity=null)
         {
             var products = await productReposirory.GetAll();

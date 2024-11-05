@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using STORE_Website.Models;
 using STORE_Website.Services;
@@ -10,10 +11,12 @@ namespace STORE_Website.Controllers
     public class UserController : Controller
     {
         private readonly IUserRepository reposirory;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public UserController(IUserRepository reposirory)
+        public UserController(IUserRepository reposirory,UserManager<ApplicationUser> userManager)
         {
             this.reposirory = reposirory;
+            this.userManager = userManager;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -65,6 +68,41 @@ namespace STORE_Website.Controllers
             reposirory.Save();
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View("Create");
+        }
+        [HttpPost]
+        public async Task<IActionResult> SaveCreate(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                ApplicationUser appUser = new ApplicationUser
+                {
+                    Email = model.Email,
+                    FullName = model.FullName,
+                    UserName = model.UserName,
+                    Address = model.Address,
+                    City = model.City
+                };
+
+                IdentityResult result = await userManager.CreateAsync(appUser, model.Password);
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(appUser, "User");
+                    
+                    return RedirectToAction("Index");
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+            return View("Create", model);
+        }
+
 
     }
 }
