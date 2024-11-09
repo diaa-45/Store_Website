@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "yaVoL6pXLzZxYNFc9b/XS+jMKQkhdRMqj13lvCPyt0s=",
+  "Hash": "5L4XXxi6kAODK/adIop47PUuoMjW36sfEaqKk9x2gtQ=",
   "Source": "STORE Website",
   "BasePath": "_content/STORE Website",
   "Mode": "Default",
@@ -110,6 +110,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\products\\62e41067-2898-481f-9f67-bf1d16921f0f_dell.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\deyaa\\source\\repos\\STORE\\STORE Website\\wwwroot\\images\\products\\b898d144-dd2d-4749-b22c-e84a0e8b8e95_dell.jpg",
+      "SourceId": "STORE Website",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\deyaa\\source\\repos\\STORE\\STORE Website\\wwwroot\\",
+      "BasePath": "_content/STORE Website",
+      "RelativePath": "images/products/b898d144-dd2d-4749-b22c-e84a0e8b8e95_dell.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\products\\b898d144-dd2d-4749-b22c-e84a0e8b8e95_dell.jpg"
     },
     {
       "Identity": "C:\\Users\\deyaa\\source\\repos\\STORE\\STORE Website\\wwwroot\\images\\products\\e2c5cea8-90cc-4e3f-be2a-11b5ee1130a9_dell.jpg",

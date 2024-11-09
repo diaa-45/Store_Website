@@ -23,9 +23,9 @@ namespace STORE_Website.Services
         {
             context.Set<T>().Remove(entity);
         }
-        public async Task<List<T>> GetAll()
+        public List<T> GetAll()
         {
-            return await context.Set<T>().ToListAsync();
+            return  context.Set<T>().ToList();
         }
         public async Task<T> GetOne(int id)
         {

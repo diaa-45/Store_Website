@@ -18,9 +18,9 @@ namespace STORE_Website.Controllers
             this.reposirory = reposirory;
         }
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            List<Category> categories = await reposirory.GetAll();
+            List<Category> categories = reposirory.GetAll();
             return View("Index",categories);
         }
         [HttpGet]

@@ -13,7 +13,7 @@ namespace STORE_Website.ViewModels
         public decimal Price { get; set; }
 
         [Required]
-        public int Quantity { get; set; }
+        public int Stock { get; set; }
 
         [Required]
         public int CategoryId { get; set; }

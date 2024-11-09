@@ -1,15 +1,17 @@
-﻿@model STORE_Website.ViewModels.ProductViewModel
+﻿
+@model Product
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Update";
 }
 
-<h1>Create</h1>
+<h1>Update</h1>
 
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="SaveCreate" enctype="multipart/form-data">
+        <form asp-action="SaveUpdate">
+            <input type="hidden" asp-for="Id" />
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -31,14 +33,11 @@
                 <input asp-for="Stock" class="form-control" />
                 <span asp-validation-for="Stock" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ImageFile">Upload Image</label>
-                <input asp-for="ImageFile" type="file" class="form-control-file" />
-            </div>
+           
             <div class="form-group">
                 <label asp-for="CategoryId" class="control-label"></label>
                 <select asp-for="CategoryId" class="form-control">
-                    <option value="">----Select Category----</option>
+                    
                     @foreach(var item in ViewBag.Categories)
                     {
                         <option value="@item.Id">@item.Name</option>
@@ -46,8 +45,9 @@
                 </select>
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
+            
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>

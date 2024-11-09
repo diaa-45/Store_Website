@@ -21,9 +21,9 @@ namespace STORE_Website.Controllers
             this.webHostEnvironment = webHostEnvironment;
         }
         [AllowAnonymous]
-        public async Task<IActionResult> Index(string name = "",decimal? minPrice = null, decimal? maxPrice = null,int? quantity=null)
+        public IActionResult Index(string name = "",decimal? minPrice = null, decimal? maxPrice = null,int? quantity=null)
         {
-            var products = await productReposirory.GetAll();
+            var products = productReposirory.GetAll();
             if (!String.IsNullOrWhiteSpace(name))
             {
                 products= products.Where(p => p.Name.Contains(name,StringComparison.OrdinalIgnoreCase)).ToList();
@@ -43,9 +43,9 @@ namespace STORE_Website.Controllers
             return View("Index",products);
         }
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
-            ViewBag.Categories= await categoryRepository.GetAll();
+            ViewBag.Categories= categoryRepository.GetAll();
             return View("Create");
         }
         [HttpPost]
@@ -71,7 +71,7 @@ namespace STORE_Website.Controllers
                     Name = productViewModel.Name,
                     Description = productViewModel.Description,
                     Price = productViewModel.Price,
-                    Stock = productViewModel.Quantity,
+                    Stock = productViewModel.Stock,
                     CategoryId = productViewModel.CategoryId,
                     ImageUrl = uniqueFileName != null ? "/images/products/" + uniqueFileName : null
                 };
@@ -81,6 +81,54 @@ namespace STORE_Website.Controllers
             }
             return View(productViewModel);
         }
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
+        {
+            var product = await productReposirory.GetOne(id);
+            ViewBag.category = await categoryRepository.GetOne(product.CategoryId);
+            return View("Details",product);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Update(int id)
+        {
+            ViewBag.Categories = categoryRepository.GetAll();
+            return View("Update",await productReposirory.GetOne(id));
+        }
+        public async Task<IActionResult> SaveUpdate(UpdateProductViewModel model, int id)
+        {
+            if (ModelState.IsValid)
+            {
+                Product product = await productReposirory.GetOne(id);
+                if(product!=null)
+                {
+                    product.Name = model.Name;
+                    product.Description = model.Description;
+                    product.Price = model.Price;
+                    product.Stock = model.Stock;
+                    product.CategoryId = model.CategoryId;
 
+                    await productReposirory.Update(product);
+                
+                    return RedirectToAction("Index");
+                }
+            }
+            ViewBag.Categories =  categoryRepository.GetAll();
+            return View("Update",model);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            Product product = await productReposirory.GetOne(id);
+            ViewBag.category = await categoryRepository.GetOne(product.CategoryId);
+            return View("Delete", product);
+        }
+        public async Task<IActionResult> ConfirmDelete(int id)
+        {
+            Product product = await productReposirory.GetOne(id);
+            productReposirory.Delete(product);
+            productReposirory.Save();
+            return RedirectToAction("Index");
+        }
     }
 }

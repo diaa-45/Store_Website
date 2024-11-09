@@ -1,0 +1,29 @@
+﻿@model STORE_Website.Models.Product
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <div class="card col-md-4 m-auto">
+            <div class="card-img">
+                <img class="card-img-top" style="width: 100%; height: 200px;" src="@Model.ImageUrl" />
+            </div>
+            <p>Name: @Model.Name</p>
+		    <p>Description: @Model.Description</p>
+		    <p>Price: @Model.Price</p>
+		    <p>Stock: @Model.Stock</p>
+		    <p>Category: @ViewBag.category.Name</p>
+		    
+            <a class="btn btn-primary" asp-action="AddToCart" asp-controller="ShoppingCart">Add To Cart</a>
+        </div>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
