@@ -75,10 +75,7 @@ namespace STORE_Website.Controllers
                         .Where(i => i.ShoppingCartId == cart.Id)
                         .Include(i => i.Product)  // Include the related Product data if needed
                         .ToList();
-            if (items.Count() != 0)
-            {
-                ViewBag.Products =  productRepository.GetAll().Where(p => p.Id == items.FirstOrDefault().ProductId).ToList();
-            }
+            ViewBag.Products =  productRepository.GetAll().Where(p => p.Id == items.FirstOrDefault().ProductId).ToList();
             return View(items);
         }
 
@@ -110,14 +107,6 @@ namespace STORE_Website.Controllers
                 await shoppingCartItemRepository.Update(cartItem);
             }
 
-            return RedirectToAction("Index");
-        }
-        [AllowAnonymous]
-        public async Task<IActionResult> RemoveFromCart(int cartItemId)
-        {
-            var cartItem = await shoppingCartItemRepository.GetOne(cartItemId);
-            shoppingCartItemRepository.Delete(cartItem);
-            shoppingCartItemRepository.Save();
             return RedirectToAction("Index");
         }
     }

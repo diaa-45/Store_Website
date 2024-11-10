@@ -1,0 +1,31 @@
+﻿@model List<STORE_Website.Models.ShoppingCart>
+
+
+@if(Model.Count() == 0)
+{
+    <p>No Carts</p>
+}
+else
+{
+    <table class="table">
+    <thead>
+        <tr>
+            <th>Cart Id</th>
+            <th>User</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.ApplicationUser.FullName</td>
+                <td><a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>
+                <td><a class=" btn btn-info" asp-action="Details" asp-route-id="@item.Id">Details</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+}
+

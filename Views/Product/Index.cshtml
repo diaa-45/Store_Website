@@ -121,7 +121,7 @@
                             <p class="card-text">@item.Description</p>
                             <p class="card-text">Price: $@item.Price</p>
                             <p class="card-text">Stock: @item.Stock</p>
-                            <a class="btn btn-primary" asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-id="@item.Id">Add To Cart</a>
+                            <a class="btn btn-primary" asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-productId="@item.Id">Add To Cart</a>
                         </div>
                     </div>
                     

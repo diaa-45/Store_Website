@@ -38,7 +38,7 @@ namespace STORE_Website.Controllers
                 {
                     await userManager.AddToRoleAsync(appUser, "User");
                     await signInManager.SignInAsync(appUser, false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", controllerName: "Product");
                 }
                 foreach (var error in result.Errors)
                 {
@@ -71,7 +71,7 @@ namespace STORE_Website.Controllers
                     if (ValidPass)
                     {
                         await signInManager.SignInAsync(user, model.RemenberMe);
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Product");
                     }
                     ModelState.AddModelError("", "Email Or Password is wrong");
                     return View(model);
@@ -79,7 +79,7 @@ namespace STORE_Website.Controllers
                 ModelState.AddModelError("", "Email Or Password is wrong");
                 return View(model);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Product");
 
         }
     }
