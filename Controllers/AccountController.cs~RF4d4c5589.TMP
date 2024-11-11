@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using STORE_Website.Models;
-using STORE_Website.Services;
 using STORE_Website.ViewModels;
 
 namespace STORE_Website.Controllers
@@ -10,15 +9,10 @@ namespace STORE_Website.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
-        private readonly IUserRepository userReposirory;
-        
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
-                                   IUserRepository userReposirory
-                                   )
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this.userReposirory = userReposirory;
         }
         [HttpGet]
         public IActionResult Register()
@@ -87,12 +81,6 @@ namespace STORE_Website.Controllers
             }
             return RedirectToAction("Index", "Product");
 
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Details(string id)
-        {
-            return View("Details", await userReposirory.GetOne(id));
         }
     }
 }

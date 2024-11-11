@@ -25,6 +25,7 @@ namespace STORE_Website.Controllers
             return View("Index", users);
         }
         [HttpGet]
+        [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> Details(string id)
         {
             return View("Details",await reposirory.GetOne(id));

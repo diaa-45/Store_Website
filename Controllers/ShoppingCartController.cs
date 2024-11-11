@@ -38,8 +38,13 @@ namespace STORE_Website.Controllers
         public async Task<IActionResult> Details(int id)
         {
             ShoppingCart cart = await shoppingCartRepository.GetOne(id);
-            ViewBag.Items= shoppingCartItemRepository.GetAll().Where(i => i.Id == cart.Items.FirstOrDefault().Id).ToList();
-            ViewBag.Products = productRepository.GetAll().Where(p => p.Id == cart.Items.FirstOrDefault().ProductId).ToList();
+            cart.Items= shoppingCartItemRepository.GetAll().Where(i => i.ShoppingCartId == cart.Id).ToList();
+            if(cart.Items.Count != 0)
+            {
+                ViewBag.Items= shoppingCartItemRepository.GetAll().Where(i => i.Id == cart.Items.FirstOrDefault().Id).ToList();
+                ViewBag.Products = productRepository.GetAll().Where(p => p.Id == cart.Items.FirstOrDefault().ProductId).ToList();
+
+            }
             return View("Details", cart);
         }
 
@@ -118,6 +123,14 @@ namespace STORE_Website.Controllers
             var cartItem = await shoppingCartItemRepository.GetOne(cartItemId);
             shoppingCartItemRepository.Delete(cartItem);
             shoppingCartItemRepository.Save();
+            return RedirectToAction("Index");
+        }
+        [AllowAnonymous]
+        public async Task<IActionResult> UpdateCartItem(int cartItemId, int quantity)
+        {
+            var cartItem = await shoppingCartItemRepository.GetOne(cartItemId);
+            cartItem.Quantity = quantity;
+            await shoppingCartItemRepository.Update(cartItem);
             return RedirectToAction("Index");
         }
     }

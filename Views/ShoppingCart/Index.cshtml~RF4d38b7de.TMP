@@ -30,8 +30,9 @@ else
                     <td>@(item.Quantity * item.Product.Price)</td>
                     <td>
                         <a asp-action="RemoveFromCart" asp-route-cartItemId="@item.Id" class="btn btn-danger">Remove</a>
-                        <form asp-action="UpdateCartItem" method="post" asp-route-cartItemId="@item.Id">
+                        <form asp-action="UpdateQuantity" method="post">
                             <input type="number" name="quantity" value="@item.Quantity" />
+                            <input type="hidden" name="itemId" value="@item.Id" />
                             <button type="submit" class="btn btn-primary">Update</button>
                         </form>
                     </td>
