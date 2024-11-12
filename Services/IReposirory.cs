@@ -1,4 +1,5 @@
-﻿namespace STORE_Website.Services
+﻿
+namespace STORE_Website.Services
 {
     public interface IReposirory<T> where T : class
     {

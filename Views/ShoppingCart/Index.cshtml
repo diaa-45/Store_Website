@@ -30,19 +30,35 @@ else
                     <td>@(item.Quantity * item.Product.Price)</td>
                     <td>
                         <a asp-action="RemoveFromCart" asp-route-cartItemId="@item.Id" class="btn btn-danger">Remove</a>
-                        <form asp-action="UpdateCartItem" method="post" asp-route-cartItemId="@item.Id">
-                            <input type="number" name="quantity" value="@item.Quantity" />
-                            <button type="submit" class="btn btn-primary">Update</button>
-                        </form>
+                        <div class="input-group">
+                            <form asp-action="IncreaseCartItem" method="post" asp-route-cartItemId="@item.Id" style="display: inline;">
+                                <input type="number" name="quantity" value="@item.Quantity" />
+                                <button type="submit" class="btn btn-outline-secondary"
+                                @( @item.Product.Stock==0 ? "disabled" : "")>+</button>
+                            </form>
+                            <input type="number" name="quantity" value="@item.Quantity" class="form-control text-center" readonly min="1" max="@item.Product.Stock" />
+                            <form asp-action="DecreaseCartItem" method="post" asp-route-cartItemId="@item.Id" style="display: inline;">
+                                <button type="submit" class="btn btn-outline-secondary"
+                                @(item.Quantity <= 1 ? "disabled" : "")>-</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 
-    <form asp-action="ClearCart" method="post">
-        <button type="submit" class="btn btn-warning">Clear Cart</button>
-    </form>
+    
+    <div class="d-flex justify-content-between">
+        <div>
+            <a asp-action="ClearCart" asp-route-cartId="@Model.FirstOrDefault().ShoppingCartId" class="btn btn-warning">Clear Cart</a>
+            <a asp-action="Index" asp-controller="Product" class="btn btn-primary">Continue Shopping</a>
 
-    <a asp-action="Index" asp-controller="Product" class="btn btn-primary">Continue Shopping</a>
+        </div>
+        <div>
+            <a asp-action="MakeOrder" asp-controller="Order" class="btn btn-primary">Make Order</a>
+        </div>
+    </div>
+    
+
 }

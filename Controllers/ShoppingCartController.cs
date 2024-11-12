@@ -97,6 +97,8 @@ namespace STORE_Website.Controllers
 
             var cartItem = shoppingCartItemRepository
                                 .GetAll()
+                                .AsQueryable()
+                                .Include(i => i.Product)
                                 .FirstOrDefault(i => i.ShoppingCartId == cart.Id && i.ProductId == productId);
 
             if (cartItem == null)
@@ -108,11 +110,15 @@ namespace STORE_Website.Controllers
                     ShoppingCartId = cart.Id
                 };
                 await shoppingCartItemRepository.Create(cartItem);
+                cartItem.Product.Stock -= quantity;
+                productRepository.Save();
             }
             else
             {
                 cartItem.Quantity += quantity;
                 await shoppingCartItemRepository.Update(cartItem);
+                cartItem.Product.Stock -= quantity;
+                productRepository.Save();
             }
 
             return RedirectToAction("Index");
@@ -121,16 +127,52 @@ namespace STORE_Website.Controllers
         public async Task<IActionResult> RemoveFromCart(int cartItemId)
         {
             var cartItem = await shoppingCartItemRepository.GetOne(cartItemId);
+            ViewBag.product = await productRepository.GetOne(cartItem.ProductId);
+            cartItem.Product.Stock+= cartItem.Quantity;
             shoppingCartItemRepository.Delete(cartItem);
             shoppingCartItemRepository.Save();
             return RedirectToAction("Index");
         }
         [AllowAnonymous]
-        public async Task<IActionResult> UpdateCartItem(int cartItemId, int quantity)
+        public async Task<IActionResult> IncreaseCartItem(int cartItemId)
         {
             var cartItem = await shoppingCartItemRepository.GetOne(cartItemId);
-            cartItem.Quantity = quantity;
-            await shoppingCartItemRepository.Update(cartItem);
+            ViewBag.product = await productRepository.GetOne(cartItem.ProductId);
+            if (cartItem.Product.Stock!=0)
+            {
+                cartItem.Quantity +=1;
+                cartItem.Product.Stock -= 1;
+                await shoppingCartItemRepository.Update(cartItem);
+
+            }
+            return RedirectToAction("Index");
+        }
+        [AllowAnonymous]
+        public async Task<IActionResult> DecreaseCartItem(int cartItemId)
+        {
+            var cartItem = await shoppingCartItemRepository.GetOne(cartItemId);
+            ViewBag.product = await productRepository.GetOne(cartItem.ProductId);
+            if(cartItem.Quantity >1)
+            {
+                cartItem.Quantity -= 1;
+                cartItem.Product.Stock += 1;
+                await shoppingCartItemRepository.Update(cartItem);
+
+            }
+            return RedirectToAction("Index");
+        }
+        [AllowAnonymous]
+        public async Task<IActionResult> ClearCart(int cartId)
+        {
+            var cart = await shoppingCartRepository.GetOne(cartId);
+            var cartItems = shoppingCartItemRepository.GetAll().Where(i => i.ShoppingCartId == cart.Id).ToList();
+            foreach (var item in cartItems)
+            {
+                ViewBag.product = await productRepository.GetOne(item.ProductId);
+                item.Product.Stock += item.Quantity;
+                shoppingCartItemRepository.Delete(item);
+            }
+            shoppingCartItemRepository.Save();
             return RedirectToAction("Index");
         }
     }

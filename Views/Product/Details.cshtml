@@ -19,7 +19,7 @@
 		    <p>Stock: @Model.Stock</p>
 		    <p>Category: @ViewBag.category.Name</p>
 		    
-            <a class="btn btn-primary" asp-action="AddToCart" asp-controller="ShoppingCart">Add To Cart</a>
+            <a class="btn btn-primary" asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-productId="@Model.Id">Add To Cart</a>
         </div>
     </dl>
 </div>
