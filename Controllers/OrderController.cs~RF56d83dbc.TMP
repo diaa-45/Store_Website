@@ -1,0 +1,44 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
+using Microsoft.EntityFrameworkCore;
+using STORE_Website.Models;
+using STORE_Website.Services;
+using System.Security.Claims;
+
+namespace STORE_Website.Controllers
+{
+    public class OrderController : Controller
+    {
+        private readonly IReposirory<ShoppingCart> shoppingCartRepository;
+        private readonly IReposirory<ShoppingCartItem> shoppingCartItemRepository;
+        private readonly IReposirory<Order> orderRepository;
+
+        public OrderController(IReposirory<ShoppingCart> shoppingCartRepository,
+                                IReposirory<ShoppingCartItem> shoppingCartItemRepository,
+                                IReposirory<Order> orderRepository)
+        {
+            this.shoppingCartRepository = shoppingCartRepository;
+            this.shoppingCartItemRepository = shoppingCartItemRepository;
+            this.orderRepository = orderRepository;
+        }
+        public IActionResult Index()
+        {
+            return View();
+        }
+        public async Task<IActionResult> MakeOrder()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var cart = shoppingCartRepository.GetAll().FirstOrDefault(c => c.ApplicationUserId == userId);
+            var cartItem = shoppingCartItemRepository
+                                .GetAll()
+                                .AsQueryable()
+                                .Include(i => i.Product)
+                                .FirstOrDefault(i => i.ShoppingCartId == cart.Id);
+            foreach(var item in cartItem)
+            {
+
+            }
+
+        }
+    }
+}

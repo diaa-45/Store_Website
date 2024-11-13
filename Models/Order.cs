@@ -1,7 +1,10 @@
-﻿namespace STORE_Website.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace STORE_Website.Models
 {
     public class Order
     {
+        [Key]
         public int Id { get; set; }
 
         // Foreign key to the ApplicationUser

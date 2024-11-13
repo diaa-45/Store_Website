@@ -103,6 +103,7 @@ namespace STORE_Website.Controllers
 
             if (cartItem == null)
             {
+                if(product.Stock==0) return RedirectToAction("Index");
                 cartItem = new ShoppingCartItem
                 {
                     ProductId = productId,
@@ -115,6 +116,7 @@ namespace STORE_Website.Controllers
             }
             else
             {
+                if (product.Stock == 0) return RedirectToAction("Index");
                 cartItem.Quantity += quantity;
                 await shoppingCartItemRepository.Update(cartItem);
                 cartItem.Product.Stock -= quantity;
