@@ -3,7 +3,12 @@
 @{
     ViewData["Title"] = "Index";
 }
+@if (User.IsInRole("Admin"))
+{
 
+    Layout = "_AdminLayout";
+
+}
 <h1>Welcom @User.Identity.Name</h1>
 
 

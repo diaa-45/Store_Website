@@ -3,7 +3,11 @@
 @{
     ViewData["Title"] = "Index";
 }
+@if (User.IsInRole("Admin"))
+{
+    Layout = "_AdminLayout";
 
+}
 
 
 
@@ -56,3 +60,11 @@
 }
     </tbody>
 </table>
+<div class="pagination mt-4">
+    <form method="get" asp-action="AllOrders">
+        <button type="submit" name="page" class="btn btn-primary" value="@(ViewBag.CurrentPage - 1)" @(ViewBag.CurrentPage == 1 ? "disabled" : "")>previous</button>
+        <span>Page: @ViewBag.CurrentPage of @ViewBag.TotalPages</span>
+        <button type="submit" name="page" class="btn btn-primary" value="@(ViewBag.CurrentPage + 1)" @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")>next</button>
+        <button type="submit" name="page" class="btn btn-primary" value="@ViewBag.TotalPages" @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")>last</button>
+    </form>
+</div>

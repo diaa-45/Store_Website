@@ -88,12 +88,23 @@ namespace STORE_Website.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public IActionResult AllOrders()
+        public IActionResult AllOrders(int page=1,int pageSize=4)
         {
-            var orders = orderRepository.GetAll();
+            var orders = orderRepository.GetAll().ToList();
+            int totalOrders = orders.Count();
+            int totalPages = (int)Math.Ceiling((double)totalOrders / pageSize);
+
+            if (page < 1) page = 1;
+            if (page > totalPages) page = totalPages;
+            
+            var orderPage = orders.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
             ViewBag.User=userRepository.GetAll().Where(u=>u.Id==orders.FirstOrDefault().UserId).ToList();
 
-            return View("Index", orders);
+
+            return View("Index", orderPage);
         }
     }
 }

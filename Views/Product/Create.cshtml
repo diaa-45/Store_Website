@@ -2,9 +2,12 @@
 
 @{
     ViewData["Title"] = "Create";
-    Layout = "_AdminLayout";
 }
-
+@if (User.IsInRole("Admin"))
+{
+    Layout = "_AdminLayout";
+    
+}
 <h1>Create</h1>
 
 <hr />

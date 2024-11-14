@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "VI1HTypm1FP6Itg6TFvKSvAPjhkt5fHK/5gOWSyb3f0=",
+  "Hash": "RIt0lmec77Am2TuG++mcc1DtQ+Fn+SP2QbhvsDCk+Is=",
   "Source": "STORE Website",
   "BasePath": "_content/STORE Website",
   "Mode": "Default",
@@ -150,6 +150,25 @@
       "OriginalItemSpec": "wwwroot\\images\\products\\54e49b79-2a5a-4ae7-a772-ca7929af6125_travel bag.jpg"
     },
     {
+      "Identity": "C:\\Users\\deyaa\\source\\repos\\STORE\\STORE Website\\wwwroot\\images\\products\\5fadb195-68c5-4482-8369-9f054b7774cf_asus.jpg",
+      "SourceId": "STORE Website",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\deyaa\\source\\repos\\STORE\\STORE Website\\wwwroot\\",
+      "BasePath": "_content/STORE Website",
+      "RelativePath": "images/products/5fadb195-68c5-4482-8369-9f054b7774cf_asus.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\products\\5fadb195-68c5-4482-8369-9f054b7774cf_asus.jpg"
+    },
+    {
       "Identity": "C:\\Users\\deyaa\\source\\repos\\STORE\\STORE Website\\wwwroot\\images\\products\\62e41067-2898-481f-9f67-bf1d16921f0f_dell.jpg",
       "SourceId": "STORE Website",
       "SourceType": "Discovered",
@@ -186,6 +205,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\products\\b898d144-dd2d-4749-b22c-e84a0e8b8e95_dell.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\deyaa\\source\\repos\\STORE\\STORE Website\\wwwroot\\images\\products\\c72f5848-4407-41df-a4c6-a38070bf5d98_dell.jpg",
+      "SourceId": "STORE Website",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\deyaa\\source\\repos\\STORE\\STORE Website\\wwwroot\\",
+      "BasePath": "_content/STORE Website",
+      "RelativePath": "images/products/c72f5848-4407-41df-a4c6-a38070bf5d98_dell.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\products\\c72f5848-4407-41df-a4c6-a38070bf5d98_dell.jpg"
     },
     {
       "Identity": "C:\\Users\\deyaa\\source\\repos\\STORE\\STORE Website\\wwwroot\\images\\products\\e2c5cea8-90cc-4e3f-be2a-11b5ee1130a9_dell.jpg",

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model STORE_Website.ViewModels.HomeViewModel;
+@{
     ViewData["Title"] = "Home Page";
 
 }
@@ -8,6 +9,35 @@
     Layout="_AdminLayout";
 
 }
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Orders</h5>
+                    <p class="card-text">Numbers: @Model.OrderCount</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Users</h5>
+                    <p class="card-text">Numbers: @Model.UserCount</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Categories</h5>
+                    <p class="card-text">Numbers: @Model.CategoryCount</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
