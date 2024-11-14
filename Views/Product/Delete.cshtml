@@ -3,6 +3,12 @@
 @{
     ViewData["Title"] = "Delete";
 }
+@if (User.IsInRole("Admin"))
+{
+
+    Layout = "_AdminLayout";
+
+}
 
 <h1>Delete</h1>
 

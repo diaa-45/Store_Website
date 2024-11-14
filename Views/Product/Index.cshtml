@@ -3,6 +3,12 @@
 @{
     ViewData["Title"] = "Index";
 }
+@if (User.IsInRole("Admin"))
+{
+
+    Layout = "_AdminLayout";
+
+}
 
 <form asp-action="Index" method="get" class="form-inline mb-3 d-flex flex-wrap align-items-center">
     <div class="form-group mr-2">
@@ -94,7 +100,7 @@
                 }
         </tbody>
         </table>
-        <a class="btn btn-primary" asp-action="Create">Create New Product</a>
+        <a class="btn btn-primary" asp-action="Create" asp-controller="Product">Create New Product</a>
     }
     else
     {

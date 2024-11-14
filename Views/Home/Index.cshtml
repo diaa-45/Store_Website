@@ -1,5 +1,12 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+
+}
+@if (User.IsInRole("Admin"))
+{
+ 
+    Layout="_AdminLayout";
+
 }
 
 <div class="text-center">
