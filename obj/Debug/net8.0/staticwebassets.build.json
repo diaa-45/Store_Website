@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "RIt0lmec77Am2TuG++mcc1DtQ+Fn+SP2QbhvsDCk+Is=",
+  "Hash": "FELrx9cAUzwN/Y+RhVGDU2BQqWXGQ3NaaO+Jw+x4qy8=",
   "Source": "STORE Website",
   "BasePath": "_content/STORE Website",
   "Mode": "Default",
@@ -131,6 +131,25 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
+      "Identity": "C:\\Users\\deyaa\\source\\repos\\STORE\\STORE Website\\wwwroot\\images\\products\\32d69a96-8b4f-488f-9be8-4436f266c59c_oppo.jpg",
+      "SourceId": "STORE Website",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\deyaa\\source\\repos\\STORE\\STORE Website\\wwwroot\\",
+      "BasePath": "_content/STORE Website",
+      "RelativePath": "images/products/32d69a96-8b4f-488f-9be8-4436f266c59c_oppo.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\products\\32d69a96-8b4f-488f-9be8-4436f266c59c_oppo.jpg"
+    },
+    {
       "Identity": "C:\\Users\\deyaa\\source\\repos\\STORE\\STORE Website\\wwwroot\\images\\products\\54e49b79-2a5a-4ae7-a772-ca7929af6125_travel bag.jpg",
       "SourceId": "STORE Website",
       "SourceType": "Discovered",
@@ -224,6 +243,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\products\\c72f5848-4407-41df-a4c6-a38070bf5d98_dell.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\deyaa\\source\\repos\\STORE\\STORE Website\\wwwroot\\images\\products\\d13c0946-2ffe-411d-adaf-77b44573c1ee_iPhone 16 pro.jpg",
+      "SourceId": "STORE Website",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\deyaa\\source\\repos\\STORE\\STORE Website\\wwwroot\\",
+      "BasePath": "_content/STORE Website",
+      "RelativePath": "images/products/d13c0946-2ffe-411d-adaf-77b44573c1ee_iPhone 16 pro.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\products\\d13c0946-2ffe-411d-adaf-77b44573c1ee_iPhone 16 pro.jpg"
     },
     {
       "Identity": "C:\\Users\\deyaa\\source\\repos\\STORE\\STORE Website\\wwwroot\\images\\products\\e2c5cea8-90cc-4e3f-be2a-11b5ee1130a9_dell.jpg",

@@ -108,17 +108,11 @@ namespace STORE_Website.Controllers
         }
 
         [HttpGet]
-        
-        public async Task<IActionResult> Details(int id)
+        [Authorize(Roles = "Admin")]
+        public IActionResult Details(int id)
         {
-            Order order = await orderRepository.GetOne(id);
-            order.OrderItems = orderItemRepository.GetAll().Where(i => i.OrderId == order.Id).ToList();
-            if (order.OrderItems.Count != 0)
-            {
-                ViewBag.Items = orderItemRepository.GetAll().Where(i => i.Id == order.OrderItems.FirstOrDefault().Id).ToList();
-                ViewBag.Products = productRepository.GetAll().Where(p => p.Id == order.OrderItems.FirstOrDefault().ProductId).ToList();
-                ViewBag.User = userRepository.GetAll().Where(u => u.Id == order.UserId).ToList();
-            }
+            var order = orderRepository.GetAll().Where(o => o.Id == id);
+            ViewBag.Items= orderItemRepository.GetAll().Where(i => i.OrderId == id).ToList();
             return View("Details", order);
         }
 
