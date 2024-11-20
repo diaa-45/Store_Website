@@ -1,0 +1,70 @@
+﻿@model STORE_Website.ViewModels.HomeViewModel;
+@{
+    ViewData["Title"] = "Home Page";
+
+}
+@if (User.IsInRole("Admin"))
+{
+ 
+    Layout="_AdminLayout";
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Orders</h5>
+                    <p class="card-text">Numbers: @Model.OrderCount</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Users</h5>
+                    <p class="card-text">Numbers: @Model.UserCount</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Categories</h5>
+                    <p class="card-text">Numbers: @Model.CategoryCount</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+}
+else if(User.IsInRole("User"))
+{
+Layout="_UserLayout";
+
+
+    
+    @if (ViewBag.Categories != null)
+    {
+        <div class="row">
+            @foreach (var category in ViewBag.Categories)
+            {
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">@category.Name</h5>
+                            <p class="card-text">@category.Description</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+

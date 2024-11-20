@@ -21,7 +21,7 @@ namespace STORE_Website.Controllers
             this.webHostEnvironment = webHostEnvironment;
         }
         [AllowAnonymous]
-        public IActionResult Index(string name = "",decimal? minPrice = null, decimal? maxPrice = null,int? quantity=null)
+        public IActionResult Index(int? categoryId,string name = "",decimal? minPrice = null, decimal? maxPrice = null,int? quantity=null)
         {
             var products = productReposirory.GetAll();
             if (!String.IsNullOrWhiteSpace(name))
@@ -40,9 +40,22 @@ namespace STORE_Website.Controllers
             {
                 products = products.Where(p => p.Stock >= quantity.Value).ToList();
             }
-            return View("Index",products);
+			if (categoryId.HasValue)
+			{
+				products = products.Where(p => p.CategoryId >= categoryId.Value).ToList();
+			}
+			return View("Index",products);
         }
+		[AllowAnonymous]
         [HttpGet]
+		public async Task<IActionResult> GetProductsByCategoryId(int categoryId)
+		{
+			var products = productReposirory.GetAll().Where(p => p.CategoryId == categoryId).ToList();
+
+			return View("Index", products);
+		}
+
+		[HttpGet]
         public IActionResult Create()
         {
             ViewBag.Categories= categoryRepository.GetAll();

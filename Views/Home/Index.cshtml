@@ -35,7 +35,74 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
+}
+else if (User.IsInRole("User"))
+{
+	Layout = "_UserLayout";
+
+
+	<section id="related-products" class="related-products product-carousel py-5 position-relative overflow-hidden">
+		<div class="container">
+			<div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
+				<h4 class="text-uppercase">You May Also Like</h4>
+				<a asp-action="Index" asp-controller="Product" class="btn-link">View All Products</a>
+			</div>
+			<div class="swiper product-swiper open-up" data-aos="zoom-out">
+				<div class="swiper-wrapper d-flex">
+
+					@if (ViewBag.Products != null)
+					{
+						@foreach (var product in ViewBag.Products)
+						{
+							<div class="swiper-slide">
+								<div class="product-item image-zoom-effect link-effect">
+									<div class="image-holder">
+										<a asp-action="Details" asp-controller="Product" asp-route-id="@product.Id">
+											<img src="@product.ImageUrl" alt="product" class="product-image img-fluid shadow" style="width: 100%; height: 230px;">
+										</a>
+
+										<div class="product-content">
+											<h5 class="text-uppercase fs-5 mt-3">
+												<a asp-action="Details" asp-controller="Product" asp-route-id="@product.Id">@product.Name</a>
+												<p>$ @product.Price</p>
+												<p>Available: @product.Stock</p>
+											</h5>
+											<a class="btn btn-primary" asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-productId="@product.Id">Add To Cart</a>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						}
+
+					}
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+	@if (ViewBag.Categories != null)
+	{
+		<div class="row">
+			@foreach (var category in ViewBag.Categories)
+			{
+				<div class="col-md-4 mb-3" >
+					<div class="card h-100 shadow-sm">
+						<a asp-action="GetProductsByCategoryId" asp-controller="Product" asp-route-categoryId="@category.Id">
+							<div class="card-body">
+								<h5 class="card-title">@category.Name</h5>
+								<p class="card-text">@category.Description</p>
+							</div>
+						</a>
+					</div>
+				</div>
+			}
+		</div>
+	}
+
 }
 
 
@@ -43,3 +110,4 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+

@@ -1,0 +1,16 @@
+﻿@model IEnumerable<STORE_Website.Models.Category>
+
+<div class="row">
+    @foreach (var category in Model)
+    {
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">@category.Name</h5>
+                    <p class="card-text">@category.Description</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

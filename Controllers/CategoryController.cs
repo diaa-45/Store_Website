@@ -23,6 +23,7 @@ namespace STORE_Website.Controllers
             List<Category> categories = reposirory.GetAll();
             return View("Index",categories);
         }
+        
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
