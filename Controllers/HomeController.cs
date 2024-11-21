@@ -15,18 +15,21 @@ namespace STORE_Website.Controllers
         public readonly IReposirory<ApplicationUser> userRepository;
         public readonly IReposirory<Order> orderRepository;
         public readonly IReposirory<Product> productRepository;
+        public readonly IReposirory<OrderItem> orderItemsRepository;
 
 
 
         public HomeController(ILogger<HomeController> logger,IReposirory<ApplicationUser> userRepository,
                                 IReposirory<Order> orderRepository,IReposirory<Category> categoryRepository,
-                                IReposirory<Product> productRepository)
+                                IReposirory<Product> productRepository,
+                                IReposirory<OrderItem> orderItemsRepository)
         {
             _logger = logger;
             this.userRepository = userRepository;
             this.orderRepository = orderRepository;
             this.categoryRepository = categoryRepository;
             this.productRepository = productRepository;
+            this.orderItemsRepository = orderItemsRepository;
         }
 
         public async Task<IActionResult> Index()
@@ -38,7 +41,23 @@ namespace STORE_Website.Controllers
                 CategoryCount = categoryRepository.GetAll().Count(),
                 // Add other analytical data here as needed
             };
-            ViewBag.Products = productRepository.GetAll().OrderBy(c => Guid.NewGuid()).Take(4).ToList();
+            ViewBag.ordersTotal = orderRepository.GetAll().Sum(o => o.TotalAmount);
+			// Find the bestseller product
+			var bestSeller = orderItemsRepository.GetAll().ToList()
+				.GroupBy(i => i.ProductId) // Group by ProductId
+				.Select(g => new
+				{
+					ProductId = g.Key,
+					TotalQuantity = g.Sum(i => i.Quantity)
+				})
+				.OrderByDescending(p => p.TotalQuantity) // Order by total quantity descending
+				.FirstOrDefault();
+
+			ViewBag.bestSellerProduct = bestSeller != null
+				? productRepository.GetAll().FirstOrDefault(p => p.Id == bestSeller.ProductId)
+				: null;
+            ViewBag.BestSellerNumberOfOrder =  bestSeller.TotalQuantity;
+			ViewBag.Products = productRepository.GetAll().OrderBy(c => Guid.NewGuid()).Take(4).ToList();
 
             ViewBag.Categories = categoryRepository.GetAll();
             return View(viewModel);

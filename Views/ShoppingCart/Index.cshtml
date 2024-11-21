@@ -48,7 +48,7 @@ else
         </tbody>
     </table>
 
-    
+    <h5>Total Price: $@Model.Sum(x => x.Quantity * x.Product.Price)</h5>
     <div class="d-flex justify-content-between">
         <div>
             <a asp-action="ClearCart" asp-route-cartId="@Model.FirstOrDefault().ShoppingCartId" class="btn btn-warning">Clear Cart</a>

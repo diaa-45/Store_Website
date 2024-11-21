@@ -37,11 +37,9 @@
         </div>
     </div>
     </div>
-	<br />
-	<div class="image-holder m-auto center">
-		<h2 class="text-uppercase fs-5">Best Seller</h2>
+	<div class="image-holder">
 		<a asp-action="Details" asp-controller="Product" asp-route-id="@ViewBag.bestSellerProduct.Id">
-			<img src="@ViewBag.bestSellerProduct.ImageUrl" alt="product" class="product-image img-fluid shadow" style="width: 50%; height: 200px;">
+			<img src="@ViewBag.bestSellerProduct.ImageUrl" alt="product" class="product-image img-fluid shadow" style="width: 100%; height: 230px;">
 		</a>
 
 		<div class="product-content">
@@ -50,7 +48,7 @@
 				<h5 class="card-title">@ViewBag.bestSellerProduct.Name</h5>
 				<p class="card-text">@ViewBag.bestSellerProduct.Description</p>
 				<p class="card-text">Price: $@ViewBag.bestSellerProduct.Price</p>
-				<h4 class="card-text">Number of orders: @ViewBag.BestSellerNumberOfOrder</h4>
+				<p class="card-text">Stock: @ViewBag.bestSellerProduct.Stock</p>
 
 			</h5>
 		</div>

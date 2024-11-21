@@ -77,7 +77,7 @@ namespace STORE_Website.Controllers
                     if (ValidPass)
                     {
                         await signInManager.SignInAsync(user, model.RemenberMe);
-                        return RedirectToAction("Index", "Product");
+                        return RedirectToAction("Index", "Home");
                     }
                     ModelState.AddModelError("", "Email Or Password is wrong");
                     return View(model);
@@ -85,7 +85,7 @@ namespace STORE_Website.Controllers
                 ModelState.AddModelError("", "Email Or Password is wrong");
                 return View(model);
             }
-            return RedirectToAction("Index", "Product");
+            return RedirectToAction("Index", "Home");
 
         }
 
