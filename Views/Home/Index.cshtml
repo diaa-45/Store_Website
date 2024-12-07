@@ -127,8 +127,16 @@ else if (User.IsInRole("User"))
 }
 
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!-- Hero Section with Buttons -->
+<section class="vh-100 d-flex align-items-center bg-light">
+	<div class="container text-center">
+		<h1 class="display-4">Welcome to MyWebsite</h1>
+		<p class="lead text-muted mb-4">Please login or register to access our features.</p>
+		<div class="d-flex justify-content-center gap-3">
+			<a asp-action="Login" asp-controller="Account" class="btn btn-primary btn-lg">Login</a>
+			<a asp-action="Register" asp-controller="Account" class="btn btn-success btn-lg">Register</a>
+		</div>
+	</div>
+</section>
+
 

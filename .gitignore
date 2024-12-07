@@ -3,7 +3,7 @@ root = true
 
 # C# files
 [*.cs]
-.vs/
+.vs/appsettings.json
 #### Core EditorConfig Options ####
 
 # Indentation and spacing
